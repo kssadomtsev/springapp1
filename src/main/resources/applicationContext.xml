@@ -13,11 +13,15 @@
     </bean>
 
     <bean id="musicBean2"
-          class="ru.sadomtsev.springcourse.ClassicalMusic">
+          class="ru.sadomtsev.springcourse.ClassicalMusic"
+          init-method="doMyInit"
+          destroy-method="doMyDestroy"
+          factory-method="getClassicalMusic">
     </bean>
 
     <bean id="musicPlayer"
-          class="ru.sadomtsev.springcourse.MusicPlayer">
+          class="ru.sadomtsev.springcourse.MusicPlayer"
+          scope="prototype">
         <property name="musicList">
             <list>
                 <ref bean="musicBean1"/>
