@@ -1,37 +1,34 @@
 package ru.sadomtsev.springcourse;
 
-import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
+import java.util.Random;
 
+
+@Component
 public class MusicPlayer {
-    private List<Music> musicList = new ArrayList<>();
-    private String name;
-    private int volume;
+    private Music music1;
+    private Music music2;
 
-    public MusicPlayer() {
+    @Autowired
+    public MusicPlayer(@Qualifier("rockMusic") Music music1,
+                       @Qualifier("classicalMusic") Music music2) {
+        this.music1 = music1;
+        this.music2 = music2;
     }
 
-    public void playMusic() {
-        musicList.forEach(x-> System.out.println(x.getSong()));
+    public String playMusic(Genre genre) {
+        if (genre == Genre.CLASSICAL) {
+            return getRandomChestItem(music2.getSongs());
+        } else {
+            return getRandomChestItem(music1.getSongs());
+        }
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
+    private String getRandomChestItem(List<String> items) {
+        return items.get(new Random().nextInt(items.size()));
     }
 }

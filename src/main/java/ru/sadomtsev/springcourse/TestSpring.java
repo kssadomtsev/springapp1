@@ -8,7 +8,7 @@ public class TestSpring {
         //Music music = context.getBean("musicBean", Music.class);
 
         //MusicPlayer musicPlayer = new MusicPlayer(music);
-        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+/*        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
         MusicPlayer musicPlayerTwo = context.getBean("musicPlayer", MusicPlayer.class);
 
         boolean compramison = musicPlayer == musicPlayerTwo;
@@ -19,6 +19,11 @@ public class TestSpring {
 
         System.out.println(musicPlayer.getName());
         System.out.println(musicPlayer.getVolume());
+        context.close();*/
+        Computer computer = context.getBean("computer", Computer.class);
+        System.out.println(computer);
+
         context.close();
+
     }
 }
